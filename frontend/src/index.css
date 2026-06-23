@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Theme tokens. Values are space-separated RGB channels so
+   Tailwind can apply opacity via rgb(var(--x) / <alpha-value>).
+   Dark is the default; [data-theme="light"] overrides it.
+   Palettes follow VS Code Dark+ / Light+ for familiarity.
+   ============================================================ */
+:root {
+  --ink: 30 30 30;          /* app background        #1e1e1e */
+  --surface: 37 37 38;      /* sunken surfaces       #252526 */
+  --panel: 37 37 38;        /* cards                 #252526 */
+  --elevated: 45 45 48;     /* nested / hover        #2d2d30 */
+  --line: 62 62 66;         /* borders               #3e3e42 */
+  --muted: 158 158 158;     /* secondary text        #9e9e9e */
+  --ghost: 117 117 117;     /* tertiary text         #757575 */
+  --ice: 212 212 212;       /* primary text          #d4d4d4 */
+  --accent: 75 156 245;     /* primary accent        #4b9cf5 */
+  --accent2: 78 201 176;    /* secondary accent      #4ec9b0 */
+  --good: 137 209 133;
+  --warn: 215 186 125;
+  --bad: 244 135 113;
+
+  /* syntax */
+  --syn-comment: 106 153 85;
+  --syn-keyword: 86 156 214;
+  --syn-reg: 156 220 254;
+  --syn-imm: 181 206 168;
+  --syn-label: 220 220 170;
+  --syn-text: 212 212 212;
+  --syn-punct: 150 150 150;
+
+  /* instruction bit-fields */
+  --f-opcode: 197 134 192;
+  --f-funct3: 220 220 170;
+  --f-funct7: 206 145 120;
+  --f-rd: 78 201 176;
+  --f-rs1: 156 220 254;
+  --f-rs2: 224 160 192;
+  --f-imm: 181 206 168;
+}
+
+[data-theme="light"] {
+  --ink: 246 246 246;       /* #f6f6f6 */
+  --surface: 236 236 236;
+  --panel: 255 255 255;
+  --elevated: 240 240 240;
+  --line: 222 222 222;      /* #dedede */
+  --muted: 90 90 90;
+  --ghost: 138 138 138;
+  --ice: 36 36 36;          /* #242424 */
+  --accent: 0 103 184;      /* #0067b8 */
+  --accent2: 14 124 116;    /* #0e7c74 */
+  --good: 26 127 55;
+  --warn: 154 103 0;
+  --bad: 197 32 46;
+
+  --syn-comment: 0 128 0;
+  --syn-keyword: 0 0 255;
+  --syn-reg: 4 30 110;
+  --syn-imm: 9 134 88;
+  --syn-label: 121 94 38;
+  --syn-text: 36 36 36;
+  --syn-punct: 90 90 90;
+
+  --f-opcode: 154 0 196;
+  --f-funct3: 121 94 38;
+  --f-funct7: 180 80 10;
+  --f-rd: 9 120 80;
+  --f-rs1: 4 30 110;
+  --f-rs2: 168 30 122;
+  --f-imm: 26 105 56;
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background-color: rgb(var(--ink));
+  color: rgb(var(--ice));
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle, scoped transitions only (no large motion). */
+button, a, input, textarea,
+section, header, .themed {
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+/* One-time, gentle panel entrance — the only animation in the app. */
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.panel-in { animation: panelIn 0.22s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, .panel-in { animation: none !important; transition: none !important; }
+}
+
+/* Scrollbars */
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: rgb(var(--line)); border-radius: 8px;
+  border: 2px solid transparent; background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: rgb(var(--muted) / 0.5); }
+::selection { background: rgb(var(--accent) / 0.30); }
