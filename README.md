@@ -1,8 +1,7 @@
 # RV32 Studio — RISC-V Simulator (React + FastAPI)
 
 A minimal, dark-themed educational simulator for a subset of **RV32I**, rebuilt
-from a Tkinter prototype into a proper **frontend / backend** product. The UI is
-deliberately calm and static so attention stays on the logic — the encoding,
+from a Tkinter prototype into a proper **frontend / backend** product. The encoding,
 the registers, and the decoded fields — rather than on motion.
 
 The Python simulator core (parser, ALU, register file, memory, CPU) is reused
